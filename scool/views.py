@@ -13,3 +13,11 @@ def index(request):
 
     #return render(request, '1.html', {'data':'Hello'})  
     return render(request, 'view_data.html', {'persons': persons, 'courses': courses, 'grades': grades})
+
+def persons(r, id):
+    if id:
+        person = Person.objects.get(id=id)
+        return render(r, 'person.html', {'student':person})
+    
+    data = Person.objects.all()
+    return render(r, 'persons.html', {'students':data})

@@ -23,8 +23,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index',),
-    path('persons/', index, name='persons',),
-    path('persons/<int:id>', index, name='person',),
+
+    path('persons/', persons, name='persons', kwargs={'id':0}),
+    path('persons/<int:id>', persons, name='person',),
     path('persons/add/', index, name='addperson',),
     path('persons/edit/<int:id>', index, name='editperson',),
 

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} Студенты {% endblock %}
+
+{% block content1_head %}
+    <h2>Студенты</h2>
+{% endblock %}
+
+{% block content1 %}
+    <div class="students">
+        {% for s in students %}
+            <div class="students-cell">{{ forloop.counter }}</div>
+            <div class="students-cell"><a href="{{ s.get_absolute_url}}"></a></div>
+            <div class="students-cell">
+            {% if s.photo %}
+            <img class="img-student thumb" src="{{s.photo.url}}">
+            {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <div><a href="{% url 'addperson' %}">Добавить</a></div>
+{% endblock %}

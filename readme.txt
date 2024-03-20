@@ -28,7 +28,7 @@ TEMPLATES = [
 
 LANGUAGE_CODE = 'ru-RU'
 
-# STATIC_ROOT = Path(BASE_DIR, 'static') # для деплоя на сервер 
+# STATIC_ROOT = Path(BASE_DIR, 'static') # пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 
 STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
 
 ALLOWED_HOSTS = ['*']
@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ['*']
 
 apps.py
 -------
-    verbose_name = "Академия У"
+    verbose_name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ"
 
 urls.py
 -------
@@ -63,7 +63,7 @@ from django.core.validators import (
 class Person(models.Model):
     last_name = models.CharField(
             max_length=25,
-            verbose_name = 'Имя'
+            verbose_name = 'пїЅпїЅпїЅ'
             # null=False,
             # blank = False, 
             # db_column
@@ -74,16 +74,16 @@ class Person(models.Model):
             )
     first_name = models.CharField(
             max_length=25,
-            verbose_name = 'Фамилия')
+            verbose_name = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ')
     age = models.PositiveSmallIntegerField(
         default=0,
         validators=[MinValueValidator(12), MaxValueValidator(99)],
-        verbose_name = 'Возраст'
+        verbose_name = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ'
     )
     course = models.ManyToManyField(
             'Course', 
             blank=True,
-            verbose_name = 'Посещаемые курсы')  
+            verbose_name = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ')  
     
 
     def __str__(self) -> str:
@@ -92,8 +92,8 @@ class Person(models.Model):
     class Meta:
         indexes= [models.Index(fields=['first_name'])]
         # ordering = ['first_name']
-        verbose_name = "Ученик"
-        verbose_name_plural = "Ученики"
+        verbose_name = "пїЅпїЅпїЅпїЅпїЅпїЅ"
+        verbose_name_plural = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
         db_table = 'students'
         # absrtract = True
 
@@ -113,21 +113,21 @@ class Course(models.Model):
         choices=langs,
         default='',
         blank = False,
-        verbose_name = 'Наименование')
+        verbose_name = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ')
     course_num = models.SmallIntegerField(
             default=0,
-            verbose_name = 'Номер курса')
+            verbose_name = 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ')
   
-    start_date = models.DateField(verbose_name = 'Начало курса', null=True)
-    end_date = models.DateField(verbose_name = 'Окончание курса', null=True)
+    start_date = models.DateField(verbose_name = 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', null=True)
+    end_date = models.DateField(verbose_name = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', null=True)
     
     def __str__(self) -> str:
         return f'{self.get_name_display()}-{self.course_num}'
 
     class Meta:
         unique_together = ('name', 'course_num')
-        verbose_name = "Курс"
-        verbose_name_plural = "Курсы"
+        verbose_name = "пїЅпїЅпїЅпїЅ"
+        verbose_name_plural = "пїЅпїЅпїЅпїЅпїЅ"
 
 
 class Grade(models.Model):
@@ -135,30 +135,30 @@ class Grade(models.Model):
             Person, 
             on_delete=models.CASCADE,
             related_name="grades",
-            verbose_name = 'Чья оценка')
+            verbose_name = 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ')
     grade = models.PositiveSmallIntegerField(
         default=0,
         validators=[MinValueValidator(0), MaxValueValidator(100)],
-        verbose_name = 'Оценка'
+        verbose_name = 'пїЅпїЅпїЅпїЅпїЅпїЅ'
     )
     course = models.ForeignKey(
             Course, 
             null=True,
             on_delete=models.CASCADE,
-            verbose_name = 'Курс')
+            verbose_name = 'пїЅпїЅпїЅпїЅ')
     date_add = models.DateField(
             auto_now_add=True, 
             null=True,
-            verbose_name = 'Дата добавления')
+            verbose_name = 'пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ')
     date_upd = models.DateField(
             auto_now=True,
             null=True,
-            verbose_name = 'Дата изменения')
-    date = models.DateField(verbose_name = 'Дата оценки', null=True)
+            verbose_name = 'пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ')
+    date = models.DateField(verbose_name = 'пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ', null=True)
 
     class Meta:
-        verbose_name = "Оценка"
-        verbose_name_plural = "Оценки"    
+        verbose_name = "пїЅпїЅпїЅпїЅпїЅпїЅ"
+        verbose_name_plural = "пїЅпїЅпїЅпїЅпїЅпїЅ"    
 
 
 
@@ -171,17 +171,17 @@ rom .models import Person, Course, Grade
 
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
-    # показывать только эти поля
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     list_display=('last_name', 'first_name', 'average_grade1', 'average_grade2')    
     
-    # добавить поиск по полямм 
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 
     search_fields = ('last_name__startswith',)
     # search_fields = ('last_name',)
 
-    # добавить фильтр
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     list_filter = ('first_name',)
 
-    # вычисление среднего бала
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     def average_grade1(self, obj):
         from django.db.models import Avg
         res = Grade.objects.filter(person=obj).aggregate(Avg('grade', default=0))
@@ -191,7 +191,7 @@ class PersonAdmin(admin.ModelAdmin):
         gs = [g.grade for g in obj.grades.all()]
         return round(sum(gs)/len(gs),2) if gs else '---'
 
-    average_grade1.short_description = "Средняя оценка"
+    average_grade1.short_description = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ"
 
 @admin.register(Course)
 class PersonCourse(admin.ModelAdmin):
@@ -214,9 +214,9 @@ Person:
 |   Column     |       Type       | Null | Key | Default |    Comment     |
 +--------------+------------------+------+-----+---------+----------------+
 |   id         |   int(11)        |  NO  | PRI |  NULL   |   Primary Key  |
-|  last_name   |  varchar(25)     |  YES |     |  NULL   |      Имя       |
-|  first_name  |  varchar(25)     |  YES |     |  NULL   |    Фамилия     |
-|     age      |  smallint(5)     |  YES |     |    0    |    Возраст     |
+|  last_name   |  varchar(25)     |  YES |     |  NULL   |      пїЅпїЅпїЅ       |
+|  first_name  |  varchar(25)     |  YES |     |  NULL   |    пїЅпїЅпїЅпїЅпїЅпїЅпїЅ     |
+|     age      |  smallint(5)     |  YES |     |    0    |    пїЅпїЅпїЅпїЅпїЅпїЅпїЅ     |
 +--------------+------------------+------+-----+---------+----------------+
 
 Course:
@@ -224,10 +224,10 @@ Course:
 |   Column     |       Type       | Null | Key | Default |    Comment     |
 +--------------+------------------+------+-----+---------+----------------+
 |   id         |   int(11)        |  NO  | PRI |  NULL   |   Primary Key  |
-|     name     |  varchar(25)     |  YES |     |  NULL   |  Наименование  |
-| course_num   |  smallint(5)     |  YES |     |    0    |  Номер курса   |
-| start_date   |  date            |  YES |     |  NULL   |  Начало курса  |
-|  end_date    |  date            |  YES |     |  NULL   | Окончание курса|
+|     name     |  varchar(25)     |  YES |     |  NULL   |  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  |
+| course_num   |  smallint(5)     |  YES |     |    0    |  пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ   |
+| start_date   |  date            |  YES |     |  NULL   |  пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ  |
+|  end_date    |  date            |  YES |     |  NULL   | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ|
 +--------------+------------------+------+-----+---------+----------------+
 
 Grade:
@@ -235,10 +235,10 @@ Grade:
 |   Column     |       Type       | Null | Key | Default |    Comment     |
 +--------------+------------------+------+-----+---------+----------------+
 |   id         |   int(11)        |  NO  | PRI |  NULL   |   Primary Key  |
-|   person_id  |   int(11)        |  YES | MUL |  NULL   |  Чья оценка    |
-|    grade     |  smallint(5)     |  YES |     |    0    |     Оценка     |
-|  course_id   |   int(11)        |  YES | MUL |  NULL   |     Курс       |
-|  date_add    |      date        |  YES |     |  NULL   | Дата добавления|
-|  date_upd    |      date        |  YES |     |  NULL   | Дата изменения |
-|     date     |      date        |  YES |     |  NULL   |  Дата оценки   |
+|   person_id  |   int(11)        |  YES | MUL |  NULL   |  пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ    |
+|    grade     |  smallint(5)     |  YES |     |    0    |     пїЅпїЅпїЅпїЅпїЅпїЅ     |
+|  course_id   |   int(11)        |  YES | MUL |  NULL   |     пїЅпїЅпїЅпїЅ       |
+|  date_add    |      date        |  YES |     |  NULL   | пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ|
+|  date_upd    |      date        |  YES |     |  NULL   | пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ |
+|     date     |      date        |  YES |     |  NULL   |  пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ   |
 +--------------+------------------+------+-----+---------+----------------+

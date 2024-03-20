@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content1 %}
+    <h1>View Data</h1>
+
+    <h2>Persons:</h2>
+    <ul>
+        {% for person in persons %}
+        <li>{{ person.first_name }} {{ person.last_name }} - Age: {{ person.age }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Courses:</h2>
+    <ul>
+        {% for course in courses %}
+        <li>{{ course.name }} ({{ course.course_num }}) - Start Date: {{ course.start_date }} - End Date: {{ course.end_date }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Grades:</h2>
+    <ul>
+        {% for grade in grades %}
+        <li>{{ grade.person.first_name }} {{ grade.person.last_name }} - Course: {{ grade.course.name }} (Grade: {{ grade.grade }})</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

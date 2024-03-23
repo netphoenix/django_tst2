@@ -55,8 +55,11 @@ class Show_course(DetailView):
     template_name = 'course.html'
     pk_url_kwarg = 'id'
 
+@login_required(login_url='/admin/')
 def course_add_view(r):
     # без модели
+    print(r.user.username)
+    print(r.method)
     if r.method == 'POST':
         form = AddCourseForm2(r.POST)
         if form.is_valid():

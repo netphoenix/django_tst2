@@ -26,13 +26,13 @@ urlpatterns = [
 
     path('persons/', persons, name='persons', kwargs={'id':0}),
     path('persons/<int:id>', persons, name='person',),
-    path('persons/add/', index, name='addperson',),
+    path('persons/add/', PersonAdd.as_view(), name='addperson',),
     path('persons/edit/<int:id>', index, name='editperson',),
 
-    path('courses/', index, name='courses',),
-    path('courses/<int:id>', index, name='course',),
-    path('courses/add/', index, name='courseadd',),
-    path('courses/edit/<int:id>', index, name='editcourse',),
+    path('courses/', Courses.as_view(), name='courses',),
+    path('courses/<int:id>', Show_course.as_view(), name='course',),
+    path('courses/add/', course_add_view, name='addcourse',),
+    path('courses/edit/<int:id>', course_edit_view, name='editcourse',),
 
     ]
 

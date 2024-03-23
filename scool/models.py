@@ -1,7 +1,5 @@
 from django.db import models
-
-# Create your models here.
-
+from django.urls import reverse
 from django.core.validators import (
     MinValueValidator, 
     MaxValueValidator)
@@ -24,8 +22,7 @@ class Person(models.Model):
     age = models.PositiveSmallIntegerField(
         default=0,
         validators=[MinValueValidator(12), MaxValueValidator(99)],
-        verbose_name = 'Возраст'
-    )
+        verbose_name = 'Возраст')
     course = models.ManyToManyField(
             'Course', 
             blank=True,
@@ -33,11 +30,13 @@ class Person(models.Model):
     photo = models.ImageField(
         upload_to='photos/%Y/%m/%d',
         blank=True,
-        verbose_name='Фото'
-        )
+        verbose_name='Фото')
     
     def __str__(self) -> str:
         return f'{self.last_name} {self.first_name} {self.age}'
+    
+    def get_absolute_url(self):
+        return reverse('person', kwargs={'id': self.pk})
 
     class Meta:
         indexes= [models.Index(fields=['first_name'])]
@@ -70,6 +69,9 @@ class Course(models.Model):
 
     def __str__(self) -> str:
         return f'{self.get_name_display()}-{self.course_num}'
+    
+    def get_absolute_url(self):
+        return reverse('course', kwargs={'id': self.pk})
 
     class Meta:
         unique_together = ('name', 'course_num')

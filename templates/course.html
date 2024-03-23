@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} Курс {% endblock %}
+
+{% block content1_head %}
+    <h2>Курс</h2>
+{% endblock %}
+
+{% block content1 %}
+        <div class="courses">
+            <div class="courses-cell">{{course.course_num}}</div>
+            <div class="courses-cell">{{course}}</div>
+            <div class="courses-cell">{{course.start_date}}</div>
+            <div class="courses-cell">{{course.end_date}}</div>
+            <div class="courses-cell">{{course.description}}</div>
+        </div>
+{% endblock %}

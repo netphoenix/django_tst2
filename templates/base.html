@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Квизы</title>    
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/students.css' %}">
 </head>
 <body>
     
@@ -14,7 +15,7 @@
             <ul class="main-menu">
                 {% block main_menu %}
                 <li><a href="{% url 'persons' %}">Ученики</a></li>
-                <li><a href="">Курсы</a></li>
+                <li><a href="{% url 'courses' %}">Курсы</a></li>
                 <li><a href="">Журнал</a></li>
                 <li><a href="/login/">логин</a></li>
                 <li><a href="/reg/">регистрация</a></li>

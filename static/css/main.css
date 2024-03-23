@@ -95,3 +95,32 @@ h2 {
 legend{
     text-align: left;
 }
+
+/* .clear{
+    clear: both;
+}
+
+table{
+    table-layout: fixed;
+    width: 90%;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+td{
+    width: 130px;
+    padding: 5px;
+    height: 50px;
+    border: silver 1px solid;
+}
+
+td:last-child{
+    width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+} */
+
+.errorlist{
+    color: rgb(185,12,18)
+}

@@ -8,6 +8,7 @@ git remote add origin https://github.com/netphoenix/django_tst2.git
 git push -u origin main
 
 pip install django
+pip install pillow
 
 django-admin.exe startproject setting .
 python manage.py startapp scool
@@ -18,7 +19,41 @@ python manage.py migrate
 python manage.py createsuperuser
 python.exe manage.py runserver  
 
+sudo apt update
+sudo apt install python3-dev
+sudo apt install python3-venv
+sudo apt install python3-pip
+sudo apt install -y nginx
+sudo apt install -y libpq-dev
+sudo apt install -y supervisor
 
+python3 -m venv .venv
+source .venv/bin/activate
+
+pip install gunicorn
+
+nano flask1.py
+nano wsgi.py
+gunicorn -b 0.0.0.0:7773 wsgi:app
+
+ls /etc/nginx/
+ls /etc/nginx/sites-enabled/
+sudo nano /etc/nginx/sites-enabled/default 
+sudo service nginx restart
+ls /etc/supervisor/conf.d/
+sudo nano /etc/supervisor/conf.d/flask1.conf
+    [program:flask1]
+    command = /home/nightsolarghost/flask_tst/venv/bin/gunicorn -b 127.0.0.1:7774 -w 4 --timeout 904 wsgi:app
+    autostart = true
+    autorestart = true
+    directory = home/nightsolarghost/flask_tst/
+    stderr_logfile = /var/log/flask_tst.err.log
+    stdout_logfile = /var/log/flask_tst.out.log
+        command = /home/nightsolarghost/django_tst2/.venv/bin/gunicorn django_tst2.wsgi -b 127.0.0.1:8000 -w 8 --timeout 90
+sudo supervisorctl reread
+sudo supervisorctl updade
+sudo supervisorctl restart flask1
+sudo supervisorctl stop flask1
 
 settings.py
 -----------

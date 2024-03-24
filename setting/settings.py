@@ -17,6 +17,9 @@ DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS":False}
 
 from pathlib import Path
 
+# Импортируем модуль для определения текущей операционной системы
+import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -112,18 +115,28 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Устанавливаем кеш в зависимости от операционной системы
+if os.name == 'nt':  # Проверяем, что это Windows
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+            "LOCATION": "c:/temp",
+            # "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+        }
+    }
+else:  # Иначе, считаем, что это Linux
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+            "LOCATION": "/var/tmp/django_cache",
+        }
+    }
 # CACHES = {
 #     "default": {
 #         "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
 #         "LOCATION": "127.0.0.1:11211",
 #     }
 # }
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
-        "LOCATION": "/django_cache",
-    }
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

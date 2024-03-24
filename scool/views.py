@@ -1,11 +1,13 @@
 from typing import Any
 from django.db.models.query import QuerySet
+from django.forms import BaseModelForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Person, Course, Grade
 from .forms import *
 from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse_lazy
+from django.views.decorators.cache import cache_page
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -23,8 +25,9 @@ def index(request):
     #return render(request, '1.html', {'data':'Hello'})  
     return render(request, 'view_data.html', {'persons': persons, 'courses': courses, 'grades': grades})
 
+@cache_page(60*15)
 def persons(r, id):
-    if id:
+    if id: 
         person = Person.objects.get(id=id)
         return render(r, 'person.html', {'student':person})
    
@@ -35,7 +38,7 @@ class PersonAdd(LoginRequiredMixin, CreateView):
     form_class = AddUserForm
     template_name = 'form_add_user.html'
     success_url = reverse_lazy('persons')
-    login_url = '/admin/'
+    login_url = '/login/'
 
 class Courses(ListView):
     model=Course
@@ -55,7 +58,7 @@ class Show_course(DetailView):
     template_name = 'course.html'
     pk_url_kwarg = 'id'
 
-@login_required(login_url='/admin/')
+@login_required(login_url='/login/')
 def course_add_view(r):
     # без модели
     print(r.user.username)
@@ -90,3 +93,26 @@ def course_edit_view(r,id):
             'form_add_course.html',
             {'form':AddCourseForm2(instance=course), 'id':id}
         )
+
+
+class RegisterUser(CreateView):
+    form_class = UserCreationForm
+    template_name = 'form_reg_user.html'
+    # success_url = reverse_lazy('login')
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        # return super().form_valid(form)
+        user = form.save()
+        login(self.request, user)
+        return redirect('index')
+
+class LoginUser(LoginView):
+    form_class = AuthenticationForm
+    template_name = 'form_login_user.html'
+    def get_success_url(self) -> str:
+        # return super().get_success_url()
+        return reverse_lazy('index')
+
+def logout_user(r):
+    logout(r)
+    return redirect('login')

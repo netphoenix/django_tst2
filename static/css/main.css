@@ -37,6 +37,23 @@ a{
     background-color: #dcd0db;
 }
 
+.menu-rt {
+    float: right; /* Размещаем элементы справа */
+    height: 40px;
+}
+
+.menu-lt {
+    float: right; /* Размещаем элементы слева */
+    height: 40px;
+}
+
+.menu-user{
+    color: rgb(182,106,14);
+    font-style: italic;
+    margin-right: 50px;
+    height: 40px;
+}
+
 header, footer{
     grid-column: 1/3; 
 }
@@ -96,7 +113,7 @@ legend{
     text-align: left;
 }
 
-/* .clear{
+.clear{
     clear: both;
 }
 
@@ -119,7 +136,7 @@ td:last-child{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-} */
+}
 
 .errorlist{
     color: rgb(185,12,18)

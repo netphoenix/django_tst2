@@ -40,6 +40,7 @@ class PersonAdd(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('persons')
     login_url = '/login/'
 
+
 class Courses(ListView):
     model=Course
     template_name = 'courses.html'

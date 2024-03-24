@@ -40,6 +40,10 @@ ls /etc/nginx/
 ls /etc/nginx/sites-enabled/
 sudo nano /etc/nginx/sites-enabled/default 
 sudo service nginx restart
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_set_header Cookie $http_cookie;
+                proxy_set_header Host $http_host;
 ls /etc/supervisor/conf.d/
 sudo nano /etc/supervisor/conf.d/flask1.conf
     [program:flask1]
@@ -49,9 +53,9 @@ sudo nano /etc/supervisor/conf.d/flask1.conf
     directory = home/nightsolarghost/flask_tst/
     stderr_logfile = /var/log/flask_tst.err.log
     stdout_logfile = /var/log/flask_tst.out.log
-        command = /home/nightsolarghost/django_tst2/.venv/bin/gunicorn django_tst2.wsgi -b 127.0.0.1:8000 -w 8 --timeout 90
+        command = /home/nightsolarghost/django_tst2/.venv/bin/gunicorn setting.wsgi -b 127.0.0.1:8000 -w 8 --timeout 90
 sudo supervisorctl reread
-sudo supervisorctl updade
+sudo supervisorctl update
 sudo supervisorctl restart flask1
 sudo supervisorctl stop flask1
 

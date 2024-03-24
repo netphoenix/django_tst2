@@ -157,7 +157,7 @@ STATIC_URL = 'static/'
 if os.name == 'nt':  # Проверяем, что это Windows
     STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
 else:
-    STATIC_ROOT = Path(BASE_DIR, 'static') # для деплоя на сервер
+    # STATIC_ROOT = Path(BASE_DIR, 'static') # для деплоя на сервер
     STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
 
 # Default primary key field type

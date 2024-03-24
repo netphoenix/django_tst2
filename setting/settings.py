@@ -154,7 +154,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATIC_ROOT = Path(BASE_DIR, 'static') # для деплоя на сервер
+if os.name != 'nt':  # Проверяем, что это Windows
+    STATIC_ROOT = Path(BASE_DIR, 'static') # для деплоя на сервер
 STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
 
 # Default primary key field type

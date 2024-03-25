@@ -8,8 +8,8 @@
 
 {% block content1 %}
     <div class="students">
-        {% load cache %}
-        {% cache 500 persons %}
+        <!-- {% load cache %}
+        {% cache 500 persons %} -->
         {% for s in students %}
             <div class="students-cell">{{ forloop.counter }}</div>
             <div class="students-cell"><a href="{{ s.get_absolute_url }}">{{s.last_name}} {{ s.first_name }}</a></div>
@@ -19,7 +19,7 @@
             {% endif %}
             </div>
         {% endfor %}
-        {% endcache %}
+        <!-- {% endcache %} -->
     </div>
     <div><a href="{% url 'addperson' %}">Добавить</a></div>
 {% endblock %}

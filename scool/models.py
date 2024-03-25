@@ -71,7 +71,7 @@ class Course(models.Model):
         return f'{self.get_name_display()}-{self.course_num}'
     
     def get_absolute_url(self):
-        return reverse('course', kwargs={'id': self.pk})
+        return reverse('editcourse', kwargs={'id': self.pk})
 
     class Meta:
         unique_together = ('name', 'course_num')

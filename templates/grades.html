@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} Оценки {% endblock %}
+
+{% block content1_head %}
+    <h2>Оценки</h2>
+{% endblock %}
+
+{% block content1 %}
+    <div class="courses">
+        {% for c in grades %}
+            <div class="courses-cell">{{ forloop.counter }}</div>
+            <div class="courses-cell"></div>
+            <div class="courses-cell">{{c.person}}</div>
+            <div class="courses-cell">{{c.grade}}</div>
+            <div class="courses-cell">{{c.course}}</div>
+        {% endfor %}
+    </div>
+    <div><a href="">Добавить</a></div>
+{% endblock %}

@@ -25,7 +25,7 @@ def index(request):
     #return render(request, '1.html', {'data':'Hello'})  
     return render(request, 'view_data.html', {'persons': persons, 'courses': courses, 'grades': grades})
 
-@cache_page(60*15)
+# @cache_page(60*15)
 def persons(r, id):
     if id: 
         person = Person.objects.get(id=id)
@@ -58,6 +58,11 @@ class Show_course(DetailView):
     model = Course
     template_name = 'course.html'
     pk_url_kwarg = 'id'
+
+class Grades(ListView):
+    model=Grade
+    template_name = 'grades.html'
+    context_object_name = 'grades' # или object_list
 
 @login_required(login_url='/login/')
 def course_add_view(r):

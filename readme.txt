@@ -1,5 +1,3 @@
-pip install django-debug-toolbar
-
 git init
 git add README.md
 git commit -m "first commit"
@@ -9,6 +7,8 @@ git push -u origin main
 
 pip install django
 pip install pillow
+pip install django-debug-toolbar
+pip install djangorestframework
 
 django-admin.exe startproject setting .
 python manage.py startapp scool

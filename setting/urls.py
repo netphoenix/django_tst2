@@ -26,6 +26,7 @@ import debug_toolbar
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index',),
+    path('api/', include('scool.urls_rest')),
 
     path('persons/', persons, name='persons', kwargs={'id':0}),
     path('persons/<int:id>', persons, name='person',),

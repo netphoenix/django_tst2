@@ -33,7 +33,8 @@ urlpatterns = [
     path('persons/add/', PersonAdd.as_view(), name='addperson',),
     path('persons/edit/<int:id>', index, name='editperson',),
 
-    # path('courses/', cache_page(50*15)(Courses.as_view()), name='courses',),
+    # Если нужен кеш
+    # path('courses/', cache_page(60*15)(Courses.as_view()), name='courses',),
     path('courses/', Courses.as_view(), name='courses',),
     path('courses/<int:id>', Show_course.as_view(), name='course',),
     path('courses/add/', course_add_view, name='addcourse',),
